@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { PlusLg, DashLg, EmojiFrown,BoxArrowDown, Trash3 } from "react-bootstrap-icons";
+import { PlusLg, DashLg, EmojiFrown,BoxArrowDown, Trash3, EmojiNeutral, EmojiSmile, EmojiLaughing} from "react-bootstrap-icons";
 import Button from 'react-bootstrap/Button';
 
 class Joke extends Component {
@@ -10,6 +10,18 @@ class Joke extends Component {
     }
     constructor(props){
         super(props)
+        this.getIcon = this.getIcon.bind(this)
+    }
+    getIcon (){
+        if(this.props.vote <= 3){
+            return <EmojiFrown/>
+        }else if (this.props.vote <= 6){
+            return <EmojiNeutral />
+        }else if(this.props.vote <= 9) {
+            return <EmojiSmile />
+        }else{
+            return <EmojiLaughing />
+        }
     }
     render(){
         // Destructuring props
@@ -37,7 +49,7 @@ class Joke extends Component {
                 <td>{text}</td>
                 <td>
                     <div className="d-flex justify-content-center aling-items-center">
-                        <EmojiFrown/>
+                        {this.getIcon()}
                     </div>
                 </td>
                 <td>
